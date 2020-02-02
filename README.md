@@ -13,6 +13,16 @@ Things you may want to cover:
 
 * Database creation
 
+users table: 
+{name: string, password: string, password_digest}
+
+tasks table:
+{content: text, limit: date, priority: integer, status: string, user_id: integer, label_id:integer}
+
+labels table
+{content: string, task_id: integer}
+
+
 * Database initialization
 
 * How to run the test suite
@@ -21,6 +31,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
-# manyo
 # manyo
