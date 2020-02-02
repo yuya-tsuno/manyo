@@ -17,7 +17,7 @@ users table:
 {name: string, password: string, password_digest}
 
 tasks table:
-{content: text, limit: date, priority: integer, status: string, user_id: integer, label_id:integer}
+{name: string, content: text, limit: date, priority: integer, status: string, user_id: integer, label_id:integer}
 
 labels table
 {content: string, task_id: integer}
