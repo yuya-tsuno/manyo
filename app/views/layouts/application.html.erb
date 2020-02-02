@@ -10,6 +10,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Manyo課題</h1>
+      <p><%= link_to 'トップ画面に戻る', root_path %> | <%= link_to '新規タスクの登録', new_task_path %></p>
+      <p>----------------------------------------------------------------------------------------------</p>
+    </header>
+
+    <div class = "container">
+      <%= yield %>
+    </div>
+
+    <footer>
+      <p>----------------------------------------------------------------------------------------------</p>
+      <p>@Manyo task memo by Yuya Tsuno</p>
+    </footer>
   </body>
 </html>
