@@ -15,7 +15,7 @@ class TasksController < ApplicationController
       render :new
     else
       if @task.save
-        redirect_to tasks_path, notice: "タスクを作成しました！"
+        redirect_to task_path(@task.id), notice: "タスクを作成しました！"
       else
         render :new
       end  
@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:id, :name, :detail)
+    params.require(:task).permit(:id, :title, :content)
   end
 
   def set_task
