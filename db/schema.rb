@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2020_02_02_095657) do
     t.integer "priority"
     t.integer "status"
     t.integer "user_id"
-    t.integer "labeling_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
