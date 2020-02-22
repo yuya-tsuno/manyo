@@ -4,6 +4,8 @@
 
 tasks_table
 >id: integer  
+>titile: string  
+>content: text  
 >limit: date  
 >status: intger (0:未着手, 1:着手中, 2:完了)  
 >user_id: integer  
