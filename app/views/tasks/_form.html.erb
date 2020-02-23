@@ -11,16 +11,16 @@
         </div>
   <% end %>
 
-  <div class="task_name">
-      <%= f.label :name, 'タスク名'%>
-      <%= f.text_field :name %>
+  <div class="task_title">
+      <%= f.label :title, 'タスク名'%>
+      <%= f.text_field :title %>
   </div>
 
-  <div class="task_detail">
-      <%= f.label :detail, 'タスク詳細' %>
-      <%= f.text_area :detail %>
+    <div class="task_content">
+      <%= f.label :content, 'タスク詳細'%>
+      <%= f.text_field :content %>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit id: "task_submit" %>
 
 <% end %>

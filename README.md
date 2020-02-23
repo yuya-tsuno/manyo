@@ -1,34 +1,28 @@
-# README
+# 万葉課題
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## テーブル設計
 
-Things you may want to cover:
+tasks_table
+>id: integer  
+>titile: string  
+>content: text  
+>limit: date  
+>priority: intger
+>status: intger (0:未着手, 1:着手中, 2:完了)  
+>user_id: integer  
+>labeling_id: integer  
 
-* Ruby version
+users_table
+>id: integer  
+>name: string  
+>password: string  
+>password_digest: string  
+>admin: boolean  
 
-* System dependencies
+labels_table
+>id: integer  
+>name: string  
 
-* Configuration
-
-* Database creation
-
-users table: 
-{name: string, password: string, password_digest}
-
-tasks table:
-{name: string, content: text, limit: date, priority: integer, status: string, user_id: integer, label_id:integer}
-
-labels table
-{content: string, task_id: integer}
-
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-# manyo
+labelings_table
+>task_id: integer  
+>label_id: integer  
