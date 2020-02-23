@@ -26,3 +26,9 @@ labels_table
 labelings_table
 >task_id: integer  
 >label_id: integer  
+
+## herokuデプロイ方法  
+1. % heroku create でherokuアプリを作成  
+2. % git push heroku ブランチ名:master で指定したブランチをherokuにpush  
+3. % heroku run rails db:migrate でmigrateを実行（データベースは自動で作成される）  
+4. % heroku open でアプリを起動
