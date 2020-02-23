@@ -1,18 +1,45 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+
+  before do
+    FactoryBot.create(:task, title: '付け加えた名前１')
+    FactoryBot.create(:task, title: '付け加えた名前２')
+    FactoryBot.create(:second_task, title: '付け加えた名前３', content: '付け加えたコンテント')
+  end
+
+  # background do
+  #   # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
+  #   FactoryBot.create(:task)
+  #   FactoryBot.create(:second_task)
+  # end
+
+  before do
+    # 「タスク一覧画面」や「タスク詳細画面」などそれぞれのテストケースで、before内のコードが実行される
+    # 各テストで使用するタスクを1件作成する
+    # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
+    @task = FactoryBot.create(:task, title: 'task_title', content: 'task_content')
+  end
   
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       # テストコードを it '~' do end ブロックの中に記載する
       it '作成済みのタスクが表示されること' do
-        # テストで使用するためのタスクを作成
-        task = FactoryBot.create(:task, title: 'task_title', content: 'task_content')
         # タスク一覧ページに遷移
         visit tasks_path
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列がhave_contentされているか。（含まれているか。）ということをexpectする（確認・期待する）
         expect(page).to have_content 'task_title'
         # expect(page).to have_content 'task_title_failure'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
+      end
+    end
+
+    context '複数のタスクを作成した場合' do
+      it 'タスクが作成日時の降順に並んでいること' do
+        new_task = FactoryBot.create(:task, title: 'new_task')
+        visit tasks_path
+        task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        expect(task_list[0]).to have_content 'new_task'
+        expect(task_list[1]).to have_content 'task'
       end
     end
   end
