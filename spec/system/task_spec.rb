@@ -1,11 +1,11 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
 
-  before do
-    FactoryBot.create(:task, title: '付け加えた名前１')
-    FactoryBot.create(:task, title: '付け加えた名前２')
-    FactoryBot.create(:second_task, title: '付け加えた名前３', content: '付け加えたコンテント')
-  end
+  # before do
+  #   FactoryBot.create(:task, title: '付け加えた名前１')
+  #   FactoryBot.create(:task, title: '付け加えた名前２')
+  #   FactoryBot.create(:second_task, title: '付け加えた名前３', content: '付け加えたコンテント')
+  # end
 
   # background do
   #   # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
@@ -17,7 +17,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     # 「タスク一覧画面」や「タスク詳細画面」などそれぞれのテストケースで、before内のコードが実行される
     # 各テストで使用するタスクを1件作成する
     # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
-    @task = FactoryBot.create(:task, title: 'task_title', content: 'task_content')
+    @task = FactoryBot.create(:task, title: 'task_title', content: 'task_content', limit: '2020-02-01 14:48:00 +0900')
   end
   
   describe 'タスク一覧画面' do
@@ -41,7 +41,19 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[0]).to have_content 'new_task'
         expect(task_list[1]).to have_content 'task'
       end
+
+      it 'タスクが終了期限の早い順に並んでいること' do
+        new_task = FactoryBot.create(:task, title: 'new_task', content: 'task_content', limit: '2020-03-01 14:48:00 +0900')
+        new_task = FactoryBot.create(:task, title: 'old_task', content: 'task_content', limit: '2020-01-01 14:48:00 +0900')
+        visit tasks_path(sort_expired: "true")
+        task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        expect(task_list[0]).to have_content 'old_task'
+        expect(task_list[1]).to have_content 'task'
+        expect(task_list[2]).to have_content 'new_task'
+      end
     end
+    
+
   end
 
   describe 'タスク登録画面' do
