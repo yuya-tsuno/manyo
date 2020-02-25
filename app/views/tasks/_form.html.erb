@@ -16,9 +16,14 @@
       <%= f.text_field :title %>
   </div>
 
-    <div class="task_content">
+  <div class="task_content">
       <%= f.label :content, 'タスク詳細'%>
       <%= f.text_field :content %>
+  </div>
+
+  <div class="task_limit">
+      <%= f.label :limit, 'タスク終了期限'%>
+      <%= f.datetime_select :limit %>
   </div>
 
   <%= f.submit id: "task_submit" %>
