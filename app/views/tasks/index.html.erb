@@ -3,6 +3,12 @@
 
 <p><%= notice %></p>
 
+<h2>タスク検索</h2>
+<%= form_tag(root_path, method: :get) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
 <table>
   <tr>
     <td>タスク名</td>
