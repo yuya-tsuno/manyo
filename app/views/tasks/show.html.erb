@@ -2,6 +2,7 @@
 <p><strong>タスク名: </strong><%= @task.title %></p>
 <p><strong>タスク詳細: </strong><%= @task.content %></p>
 <p><strong>タスク終了期限: </strong><%= @task.limit %></p>
+<p><strong>タスクステータス: </strong><%= @task.status %></p>
 
 <%= link_to '編集へ', edit_task_path(@task.id) %> |
 <%= link_to 'タスク一覧へ', tasks_path %>

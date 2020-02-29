@@ -8,7 +8,7 @@ tasks_table
 >content: text  
 >limit: date  
 >priority: intger
->status: intger (0:未着手, 1:着手中, 2:完了)  
+>status: string (未着手、着手中、完了)  
 >user_id: integer  
 >labeling_id: integer  
 
