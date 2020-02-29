@@ -1,38 +1,38 @@
 <%= form_with(model: @task, local: true) do |f| %>
 
   <% if @task.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= @task.errors.count %>件のエラーがあります。</h3>
+    <div id="error_explanation">
+      <h3><%= @task.errors.count %>件のエラーがあります。</h3>
         <ul>
           <% @task.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
+            <li><%= msg %></li>
           <% end %>
         </ul>
-        </div>
-  <% end %>
+    </div>
+<% end %>
 
   <div class="task_title">
-      <%= f.label :title, 'タスク名'%>:
-      <%= f.text_field :title %>
+    <%= f.label :title, 'タスク名'%>:
+    <%= f.text_field :title %>
   </div>
 
   <div class="task_content">
-      <%= f.label :content, 'タスク詳細'%>:
-      <%= f.text_area :content %>
+    <%= f.label :content, 'タスク詳細'%>:
+    <%= f.text_area :content %>
   </div>
 
   <div class="task_limit">
-      <%= f.label :limit, 'タスク終了期限'%>:
-      <%= f.date_select :limit %>
+    <%= f.label :limit, 'タスク終了期限'%>:
+    <%= f.date_select :limit %>
   </div>
 
   <div class="task_status">
-      <%= f.label :status, 'タスクの状態' %>:
-      <%= f.radio_button :status, "未着手" %>未着手
-      <%= f.radio_button :status, "着手中" %>着手中
-      <%= f.radio_button :status, "完了" %>完了
+    <%= f.label :status, 'タスクの状態' %>:
+    <%= f.radio_button :status, "未着手" %>未着手
+    <%= f.radio_button :status, "着手中" %>着手中
+    <%= f.radio_button :status, "完了" %>完了
   </div>
 
-  <%= f.submit id: "task_submit" %>
+<%= f.submit id: "task_submit" %>
 
 <% end %>

@@ -2,11 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    if params[:sort_expired]
-      @tasks = Task.all.order(limit: :asc)
-    else
-      @tasks = Task.all.reverse_order
-    end
+    @q = Task.ransack(params[:q])
+    @tasks = @q.result(distinct: true)
   end
 
   def new
@@ -50,6 +47,10 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def search_params
+    params.require(:q).permit!
   end
 
 end

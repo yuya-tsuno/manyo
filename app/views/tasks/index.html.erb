@@ -3,16 +3,32 @@
 
 <p><%= notice %></p>
 
+<h3>タスク検索</h3>
+<%= search_form_for @q do |f| %>
+  <div class="form-group">
+    <%= f.label :title_cont, "タスク名" %>
+    <%= f.search_field :title_cont %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Search" %>
+  </div>
+<% end %>
+
+
 <table>
   <tr>
-    <td>タスク名</td>
-    <td></td>
-    <td></td>
+    <th>タスク名</th>
+    <th><%= sort_link(@q, :limit, default_order: :desc) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr class="task_row">
     <td><%= task.title %></td>
+    <td><%= task.limit %></td>
     <td><%= link_to "タスク詳細", task_path(task.id) %></td>
     <td><%= link_to "タスク編集", edit_task_path(task.id) %></td>
     <td><%= link_to 'タスク削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
