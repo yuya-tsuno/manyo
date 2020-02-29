@@ -13,9 +13,9 @@
 <% @tasks.each do |task| %>
   <tr class="task_row">
     <td><%= task.title %></td>
-    <td><%= link_to "タスク詳細", task_path(task.id) %></td>
-    <td><%= link_to "タスク編集", edit_task_path(task.id) %></td>
-    <td><%= link_to 'タスク削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
+    <td><%= link_to "タスクの詳細を見る", task_path(task.id) %></td>
+    <td><%= link_to "タスクを編集する", edit_task_path(task.id) %></td>
+    <td><%= link_to 'タスクを削除する', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
   </tr>
 <% end %>
 </table>
