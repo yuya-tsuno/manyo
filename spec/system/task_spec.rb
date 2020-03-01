@@ -59,6 +59,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         click_link 'タスク優先度'
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        # binding.pry
         expect(task_list[0]).to have_content 'important_task'
         expect(task_list[1]).to have_content 'task'
         expect(task_list[2]).to have_content 'not_important_task'
