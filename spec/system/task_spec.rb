@@ -49,8 +49,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_link 'タスク終了期限'
         sleep 0.1
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
-        # click_link 'タスク終了期限' unless expect(task_list[0]).to have_content 'old_task'
-        # task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content 'old_task'
         expect(task_list[1]).to have_content 'task'
         expect(task_list[2]).to have_content 'new_task'
