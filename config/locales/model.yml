@@ -9,6 +9,7 @@ ja:
         content: 内容
         limit: 終了期限
         priority: タスク優先度
+        created_at: タスク登録日時
       user:
         title: タイトル
         name: 名前
