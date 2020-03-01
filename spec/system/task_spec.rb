@@ -46,8 +46,11 @@ RSpec.describe 'タスク管理機能', type: :system do
         new_task = FactoryBot.create(:task, title: 'new_task', content: 'task_content', limit: '2020-03-01')
         new_task = FactoryBot.create(:task, title: 'old_task', content: 'task_content', limit: '2020-01-01')
         visit tasks_path
-        click_link '終了期限'
+        click_link 'タスク終了期限'
+        sleep 0.1
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        # click_link 'タスク終了期限' unless expect(task_list[0]).to have_content 'old_task'
+        # task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content 'old_task'
         expect(task_list[1]).to have_content 'task'
         expect(task_list[2]).to have_content 'new_task'
@@ -58,8 +61,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         new_task = FactoryBot.create(:task, title: 'not_important_task', content: 'task_content', limit: '2020-01-01',priority: 2)
         visit tasks_path
         click_link 'タスク優先度'
+        sleep 0.1
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
-        # binding.pry
         expect(task_list[0]).to have_content 'important_task'
         expect(task_list[1]).to have_content 'task'
         expect(task_list[2]).to have_content 'not_important_task'
