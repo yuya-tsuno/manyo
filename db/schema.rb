@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_080223) do
     t.string "title", null: false
     t.text "content", null: false
     t.date "limit"
-    t.integer "priority"
+    t.integer "priority", limit: 2, null: false
     t.string "status", default: "未着手"
     t.integer "user_id"
     t.datetime "created_at", null: false

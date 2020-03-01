@@ -33,6 +33,14 @@
     <%= f.radio_button :status, "完了" %>完了
   </div>
 
+  <div class="task_priority">
+    <%= f.label :priority, 'タスク優先度' %>:
+    <%= f.radio_button :priority, :high %>高
+    <%= f.radio_button :priority, :middle %>中
+    <%= f.radio_button :priority, :low %>低
+    
+  </div>
+
 <%= f.submit id: "task_submit" %>
 
 <% end %>

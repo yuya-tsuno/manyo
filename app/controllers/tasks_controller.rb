@@ -11,6 +11,7 @@ class TasksController < ApplicationController
   end  
   
   def create
+    # binding.pry
     @task = Task.new(task_params)
     if params[:back]
       render :new
@@ -42,7 +43,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:id, :title, :content, :limit, :status)
+    params.require(:task).permit(:id, :title, :content, :limit, :status, :priority)
   end
 
   def set_task
