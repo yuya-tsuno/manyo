@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   
   def index
     @search = Task.ransack(params[:q])
+    @search.sorts = 'created_at desc' if @search.sorts.empty?
     @tasks = @search.result.page(params[:page]).per(5)
   end
 
