@@ -4,8 +4,8 @@ class Task < ApplicationRecord
   #TODO 後ほどuser_idにpresence: trueを追加します。
 
   enum priority: {
-    high: 0,
-    middle: 1,
-    low: 2
+    高: 0,
+    中: 1,
+    低: 2
   }
 end

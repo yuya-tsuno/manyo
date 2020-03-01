@@ -11,7 +11,6 @@ class TasksController < ApplicationController
   end  
   
   def create
-    # binding.pry
     @task = Task.new(task_params)
     if params[:back]
       render :new
@@ -22,6 +21,7 @@ class TasksController < ApplicationController
         render :new
       end  
     end  
+
   end  
 
   def edit
@@ -53,5 +53,4 @@ class TasksController < ApplicationController
   def search_params
     params.require(:q).permit!
   end
-
 end

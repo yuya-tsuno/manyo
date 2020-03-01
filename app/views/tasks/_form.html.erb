@@ -34,11 +34,8 @@
   </div>
 
   <div class="task_priority">
-    <%= f.label :priority, 'タスク優先度' %>:
-    <%= f.radio_button :priority, :high %>高
-    <%= f.radio_button :priority, :middle %>中
-    <%= f.radio_button :priority, :low %>低
-    
+    <%= f.label :priority %>
+    <%= f.select :priority, Task.priorities.keys.map {|k| [k, k]} %>
   </div>
 
 <%= f.submit id: "task_submit" %>
