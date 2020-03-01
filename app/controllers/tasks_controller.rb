@@ -2,8 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @q = Task.ransack(params[:q])
-    @tasks = @q.result(distinct: true)
+    @search = Task.ransack(params[:q])
+    @tasks = @search.result.page(params[:page]).per(5)
   end
 
   def new

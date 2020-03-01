@@ -3,7 +3,7 @@
 <p><%= notice %></p>
 
 <h3>タスク検索</h3>
-<%= search_form_for @q do |f| %>
+<%= search_form_for @search do |f| %>
   <div class="form-group">
     <%= f.label :title_cont, "タスク名" %>
     <%= f.search_field :title_cont %>
@@ -18,7 +18,7 @@
 <table>
   <tr>
     <th>タスク名</th>
-    <th><%= sort_link(@q, :limit, default_order: :desc) %></th>
+    <th><%= sort_link(@search, :limit, default_order: :desc) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -33,5 +33,8 @@
     <td><%= link_to 'タスク削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
   </tr>
 <% end %>
+
+<%= paginate @tasks %>
+
 </table>
 
