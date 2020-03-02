@@ -3,25 +3,19 @@
 <p><%= notice %></p>
 
 <h6>タスク検索</h6>
-<%= search_form_for @search do |f| %>
-  <div class="form-group">
-    <%= f.label :title_cont, "タスク名" %>
-    <%= f.search_field :title_cont %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Search" %>
-  </div>
+<%= form_tag tasks_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :title => nil %>
+  </p>
 <% end %>
-
-<%= paginate @tasks %>
 
 <table>
   <tr>
     <th>タスク名</th>
-    <th><%= sort_link(@search, :limit, default_order: :asc) %></th>
-    <th><%= sort_link(@search, :priority, default_order: :asc) %></th>
-    <th><%= sort_link(@search, :created_at) %></th>
+    <th><%= link_to "終了期限", tasks_path(limit_sort_expired: "true") %></th>
+    <th><%= link_to "優先度", tasks_path(priority_sort_expired: "true") %></th>
+    <th><%= link_to "作成日時", tasks_path %></th>
     <th></th>
     <th></th>
   </tr>

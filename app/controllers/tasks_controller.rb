@@ -2,9 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @search = Task.ransack(params[:q])
-    @search.sorts = 'created_at desc' if @search.sorts.empty?
-    @tasks = @search.result.page(params[:page]).per(5)
+    if params[:limit_sort_expired]
+      @tasks = Task.search(params[:search]).order(limit: :asc)
+    elsif params[:priority_sort_expired]
+      @tasks = Task.search(params[:search]).order(priority: :asc)
+    else
+      @tasks = Task.search(params[:search]).order(created_at: :desc)
+    end
   end
 
   def new

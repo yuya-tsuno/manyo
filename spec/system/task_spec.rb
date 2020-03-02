@@ -45,8 +45,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'タスクが終了期限の早い順に並んでいること' do
         new_task = FactoryBot.create(:task, title: 'new_task', content: 'task_content', limit: '2020-03-01')
         new_task = FactoryBot.create(:task, title: 'old_task', content: 'task_content', limit: '2020-01-01')
-        visit tasks_path
-        click_link 'タスク終了期限'
+        visit tasks_path(limit_sort_expired: "true")
         sleep 0.1
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content 'old_task'
@@ -57,8 +56,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'タスクが優先度の高い順に並んでいること' do
         new_task = FactoryBot.create(:task, title: 'important_task', content: 'task_content', limit: '2020-03-01', priority: 0)
         new_task = FactoryBot.create(:task, title: 'not_important_task', content: 'task_content', limit: '2020-01-01',priority: 2)
-        visit tasks_path
-        click_link 'タスク優先度'
+        visit tasks_path(priority_sort_expired: "true")
         sleep 0.1
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content 'important_task'

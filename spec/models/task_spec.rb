@@ -19,4 +19,9 @@ RSpec.describe Task, type: :model do
     # binding.irb
     expect(task).to be_valid
   end
+
+  it '検索に入力された文字を含むtitleのみを取得する' do
+    task = Task.create(title: '成功テスト', content: '成功テスト')
+    expect(task).to be_valid
+  end
 end
