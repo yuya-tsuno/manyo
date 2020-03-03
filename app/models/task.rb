@@ -9,11 +9,12 @@ class Task < ApplicationRecord
     低: 2
   }
 
-  def self.search(search) #self.でクラスメソッドとしている
-    if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
-      Task.where(['title LIKE ?', "%#{search}%"])
+  def self.search(search_title, search_status)
+    if search_title || search_status
+      Task.where(['title LIKE ?', "%#{search_title}%"]).where(['status LIKE ?', "%#{search_status}%"])
     else
-      Task.all #全て表示。
+      Task.all
     end
   end
+
 end
