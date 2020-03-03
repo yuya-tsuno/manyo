@@ -13,9 +13,12 @@
 <table>
   <tr>
     <th>タスク名</th>
-    <th><%= link_to "タスク終了期限", tasks_path(limit_sort_expired: "true") %></th>
-    <th><%= link_to "タスク優先度", tasks_path(priority_sort_expired: "true") %></th>
-    <th><%= link_to "タスク作成日時", tasks_path %></th>
+    <th><% if params[:limit_sort_expired] %><%= link_to "△タスク終了期限", tasks_path %>
+     <% else %><%= link_to "タスク終了期限", tasks_path(limit_sort_expired: "true") %><% end %></th>
+    <th><% if params[:priority_sort_expired] %><%= link_to "△タスク優先度", tasks_path %>
+     <% else %><%= link_to "タスク優先度", tasks_path(priority_sort_expired: "true") %><% end %></th>
+    <th><% if params[:limit_sort_expired] || params[:priority_sort_expired] %><%= link_to "タスク作成日時", tasks_path %>
+     <% else %><%= link_to "▽タスク作成日時", tasks_path %><% end %></th>
     <th></th>
     <th></th>
   </tr>
