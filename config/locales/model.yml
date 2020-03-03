@@ -4,9 +4,12 @@ ja:
       blog: ブログ
       user: ユーザー
     attributes:
-      blog:
-        title: タイトル
-        content: 内容
+      task:
+        title: タスク名
+        content: タスク内容
+        limit: タスク終了期限
+        priority: タスク優先度
+        created_at: タスク登録日時
       user:
         title: タイトル
         name: 名前
@@ -15,3 +18,10 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
         remember_me: ログインを記憶
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."

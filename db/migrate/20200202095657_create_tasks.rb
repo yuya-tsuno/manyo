@@ -3,6 +3,9 @@ class CreateTasks < ActiveRecord::Migration[5.2]
     create_table :tasks do |t|
       t.string :title, null: false
       t.text :content, null: false
+      t.date :limit
+      t.integer :priority, default: 1, limit: 1
+      t.string :status, default: '未着手'
       t.datetime :limit
       t.integer :priority
       t.integer :status

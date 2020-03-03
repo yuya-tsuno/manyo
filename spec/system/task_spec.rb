@@ -17,7 +17,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     # 「タスク一覧画面」や「タスク詳細画面」などそれぞれのテストケースで、before内のコードが実行される
     # 各テストで使用するタスクを1件作成する
     # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
-    @task = FactoryBot.create(:task, title: 'task_title', content: 'task_content', limit: '2020-02-01 14:48:00 +0900')
+    @task = FactoryBot.create(:task, title: 'task', content: 'task', limit: '2020-02-01', priority: 1)
   end
   
   describe 'タスク一覧画面' do
@@ -27,7 +27,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # タスク一覧ページに遷移
         visit tasks_path
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列がhave_contentされているか。（含まれているか。）ということをexpectする（確認・期待する）
-        expect(page).to have_content 'task_title'
+        expect(page).to have_content 'task'
         # expect(page).to have_content 'task_title_failure'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
@@ -43,17 +43,27 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
 
       it 'タスクが終了期限の早い順に並んでいること' do
-        new_task = FactoryBot.create(:task, title: 'new_task', content: 'task_content', limit: '2020-03-01 14:48:00 +0900')
-        new_task = FactoryBot.create(:task, title: 'old_task', content: 'task_content', limit: '2020-01-01 14:48:00 +0900')
-        visit tasks_path(sort_expired: "true")
+        new_task = FactoryBot.create(:task, title: 'new_task', content: 'task_content', limit: '2020-03-01')
+        new_task = FactoryBot.create(:task, title: 'old_task', content: 'task_content', limit: '2020-01-01')
+        visit tasks_path(limit_sort_expired: "true")
+        sleep 0.1
         task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content 'old_task'
         expect(task_list[1]).to have_content 'task'
         expect(task_list[2]).to have_content 'new_task'
       end
-    end
-    
 
+      it 'タスクが優先度の高い順に並んでいること' do
+        new_task = FactoryBot.create(:task, title: 'important_task', content: 'task_content', limit: '2020-03-01', priority: 0)
+        new_task = FactoryBot.create(:task, title: 'not_important_task', content: 'task_content', limit: '2020-01-01',priority: 2)
+        visit tasks_path(priority_sort_expired: "true")
+        sleep 0.1
+        task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        expect(task_list[0]).to have_content 'important_task'
+        expect(task_list[1]).to have_content 'task'
+        expect(task_list[2]).to have_content 'not_important_task'
+      end
+    end
   end
 
   describe 'タスク登録画面' do
