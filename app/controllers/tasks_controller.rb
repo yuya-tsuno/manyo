@@ -2,12 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    if params[:limit_sort_expired]
-      @tasks = Task.search(params[:search_title], params[:search_status]).order(limit: :asc)
-    elsif params[:priority_sort_expired]
-      @tasks = Task.search(params[:search_title], params[:search_status]).order(priority: :asc)
+    if params[:sort_expired]
+      @tasks = Task.all.order(limit: :asc)
     else
-      @tasks = Task.search(params[:search_title], params[:search_status]).order(created_at: :desc)
+      @tasks = Task.all.reverse_order
     end
   end
 
@@ -26,7 +24,6 @@ class TasksController < ApplicationController
         render :new
       end  
     end  
-
   end  
 
   def edit
@@ -48,7 +45,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:id, :title, :content, :limit, :status, :priority)
+    params.require(:task).permit(:id, :title, :content, :limit)
   end
 
   def set_task

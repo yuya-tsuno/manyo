@@ -11,17 +11,9 @@
 
   <body>
     <header>
-      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h4 class="my-0 mr-md-auto font-weight-normal"><%= link_to '万葉課題', root_path %></h4>
-          <nav class="my-2 my-md-0 mr-md-3">
-            <%= link_to 'トップ画面に戻る', root_path %>
-            <%= link_to '新規タスクの登録', new_task_path %>
-            <%= link_to '新規ユーザー登録', new_user_path %>
-          </nav>
-        <a class="btn btn-outline-primary" href="#">Sign up</a>
-      </div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <h1>Manyo課題</h1>
+      <p><%= link_to 'トップ画面に戻る', root_path %> | <%= link_to '新規タスクの登録', new_task_path %></p>
+      <p>----------------------------------------------------------------------------------------------</p>
     </header>
 
     <div class = "container">

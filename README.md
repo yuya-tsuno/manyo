@@ -15,6 +15,7 @@ tasks_table
 users_table
 >id: integer  
 >name: string  
+>password: string  
 >password_digest: string  
 >admin: boolean  
 
