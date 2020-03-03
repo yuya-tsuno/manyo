@@ -6,6 +6,9 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.date :limit
       t.integer :priority, default: 1, limit: 1
       t.string :status, default: '未着手'
+      t.datetime :limit
+      t.integer :priority
+      t.integer :status
       t.integer :user_id
       #TODO 後ほど新しいmigrationファイルでuser_idにnull: falseを追加します。
 
