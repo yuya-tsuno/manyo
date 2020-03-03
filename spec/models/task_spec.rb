@@ -21,7 +21,13 @@ RSpec.describe Task, type: :model do
   end
 
   it '検索に入力された文字を含むtitleのみを取得する' do
-    task = Task.create(title: '成功テスト', content: '成功テスト')
-    expect(task).to be_valid
+    task1 = Task.create(title: '成功テスト', content: '成功テスト', status: '着手中')
+    task2 = Task.create(title: 'titleによる失敗テスト', content: '失敗テスト', status: '着手中')
+    task3 = Task.create(title: 'statusによる失敗テスト(成功しない)', content: '失敗テスト', status: '完了')
+    @tasks = Task.search('成功', '着手中')
+    # binding.pry
+    expect(@tasks).to include task1
+    expect(@tasks).not_to include task2
+    expect(@tasks).not_to include task3
   end
 end
