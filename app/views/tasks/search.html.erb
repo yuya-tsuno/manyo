@@ -1,0 +1,18 @@
+<h1>タスク検索</h1>
+
+<%= search_form_for @search do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "タスク名" %>
+    <%= f.search_field :title %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Search" %>
+  </div>
+<% end %>
+
+<% if @tasks.any? %>
+ <% @tasks.each do |task| %>
+   <p><%= task.title %></p>
+ <% end %>
+<% end %>
