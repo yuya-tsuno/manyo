@@ -4,11 +4,11 @@ class TasksController < ApplicationController
   def index
     @q = Task.search(params[:search_title], params[:search_status])
     if params[:limit_sort_expired]
-      @tasks = @q.order(limit: :asc)
+      @tasks = @q.order(limit: :asc).page(params[:page]).per(5)
     elsif params[:priority_sort_expired]
-      @tasks = @q.order(priority: :asc)
+      @tasks = @q.order(priority: :asc).page(params[:page]).per(5)
     else
-      @tasks = @q.order(created_at: :desc)
+      @tasks = @q.order(created_at: :desc).page(params[:page]).per(5)
     end
   end
 
