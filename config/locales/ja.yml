@@ -1,4 +1,3 @@
----
 ja:
   activerecord:
     errors:
@@ -7,6 +6,16 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  enums:
+    task:
+    task/priority:
+      high: 高
+      middle: 中
+      low: 低
+    task/status:
+      not_started_yet: 未着手
+      started: 着手
+      completed: 完了
   date:
     abbr_day_names:
     - 日

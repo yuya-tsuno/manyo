@@ -28,9 +28,9 @@
 
   <div class="task_status">
     <%= f.label :status, 'タスクの状態' %>:
-    <%= f.radio_button :status, "未着手" %>未着手
-    <%= f.radio_button :status, "着手中" %>着手中
-    <%= f.radio_button :status, "完了" %>完了
+    <%= f.radio_button :status, 0 %>未着手
+    <%= f.radio_button :status, 1 %>着手中
+    <%= f.radio_button :status, 2 %>完了
   </div>
 
   <div class="task_priority">
