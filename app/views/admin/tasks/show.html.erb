@@ -6,5 +6,5 @@
 <p><strong>タスク優先度: </strong><%= @task.priority %></p>
 <p><strong>タスク投稿者: </strong><%= @task.user.name %></p>
 
-<%= link_to '編集へ', edit_task_path(@task.id) %> |
-<%= link_to 'タスク一覧へ', tasks_path %>
+<%= link_to '編集へ', edit_admin_task_path(@task.id) %> |
+<%= link_to 'タスク一覧へ', admin_tasks_path %>
