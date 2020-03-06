@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :for_guest
-  before_action :currect_user, only: [:edit, :update, :destroy]
+  before_action -> {restrict_access(@task.user_id)}, only: [:show, :edit, :update, :destroy]
   
   def index
     # binding.pry

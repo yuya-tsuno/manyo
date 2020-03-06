@@ -11,13 +11,13 @@ module SessionsHelper
     redirect_to new_session_path, notice: "ログインしてください" unless logged_in?
   end
 
-  def have_access_right?(user_id) #アクセス権限の有無をチェック
+  def have_access_right?(check_id) #アクセス権限の有無をチェック
     current_user
-    user_id == @current_user.id
+    check_id == @current_user.id
   end
 
-  def restrict_access(user_id) #アクセス権限のないユーザーへのアクセス制限
-    unless have_access_right?(user_id)
+  def restrict_access(check_id) #アクセス権限のないユーザーへのアクセス制限
+    unless have_access_right?(check_id)
       flash[:notice] = "あなたのアカウントではアクセス権限がありません"
       redirect_to tasks_path
     end
