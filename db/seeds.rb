@@ -13,8 +13,8 @@ def user_seeds
     name = Faker::Games::SuperSmashBros.fighter
     #fakerでメアド作るときは/config/initializers/locale.rbをコメントアウトすること
     email = Faker::Internet.email
-    password_digest = "pass"
-    User.create!(name: name, email: email, password_digest: password_digest, admin: false)
+    password = "pass"
+    User.create!(name: name, email: email, password: password, admin: false)
   end
 end
 

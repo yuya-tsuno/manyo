@@ -1,8 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   
   def index
-    @q = Task.search(params[:search_title], params[:search_status])
+    # binding.pry
+    @q = Task.search(params[:search_title], params[:search_status], current_user.id)
     if params[:limit_sort_expired]
       @tasks = @q.order(limit: :asc).page(params[:page]).per(5)
     elsif params[:priority_sort_expired]
@@ -54,6 +58,10 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def logged_in?
+    redirect_to new_session_path, notice:"ログインしてください" unless current_user.present?
   end
 
 end
