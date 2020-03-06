@@ -3,7 +3,8 @@
 <p><strong>タスク詳細: </strong><%= @task.content %></p>
 <p><strong>タスク終了期限: </strong><%= @task.limit %></p>
 <p><strong>タスクステータス: </strong><%= @task.status %></p> 
-<p><strong>タスク優先度: </strong><%= @task.priority %></p> 
+<p><strong>タスク優先度: </strong><%= @task.priority %></p>
+<p><strong>タスク投稿者: </strong><%= @task.user.name %></p>
 
 <%= link_to '編集へ', edit_task_path(@task.id) %> |
 <%= link_to 'タスク一覧へ', tasks_path %>

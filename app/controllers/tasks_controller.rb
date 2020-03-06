@@ -20,7 +20,9 @@ class TasksController < ApplicationController
   end  
   
   def create
-    @task = Task.new(task_params)
+    # @task = Task.new(task_params)
+    # @task.user_id = current_user.id
+    @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else
@@ -28,9 +30,8 @@ class TasksController < ApplicationController
         redirect_to task_path(@task.id), notice: "タスクを作成しました！"
       else
         render :new
-      end  
-    end  
-
+      end
+    end
   end  
 
   def edit
@@ -52,7 +53,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:id, :title, :content, :limit, :status, :priority, user_id)
+      params.require(:task).permit(:id, :title, :content, :limit, :status, :priority, :user_id)
     end
 
     def set_task
