@@ -1,6 +1,5 @@
 class Task < ApplicationRecord
-  validates :title, presence: true
-  validates :email, uniqueness: true
+  validates :title, presence: true, length: { maximum: 30 }
   validates :content, presence: true
   #TODO 後ほどuser_idにpresence: trueを追加します。
 

@@ -18,11 +18,21 @@
             <%= link_to '新規タスクの登録', new_task_path %>
             <%= link_to 'ユーザー一覧', users_path %>
           </nav>
-        <a class="btn btn-outline-primary" href="#">Sign up</a> 
-        <a class="btn btn-outline-primary" href="#">Log in</a>
+
+          <% if logged_in? %>
+            <%= link_to("Profile", user_path(current_user.id), method: :get, class: "btn btn-outline-primary") %>
+            <%= link_to("Logout", session_path(current_user.id), method: :delete, data: {confirm: "ログアウトしますか？"}, class: "btn btn-outline-primary") %>
+          <% else %>
+            <%= link_to("Sign up", new_user_path, class: "btn btn-outline-primary") %>
+            <%= link_to("Login", new_session_path, class: "btn btn-outline-primary") %>
+          <% end %>
       </div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      
+      <div>
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+      </div>  
     </header>
 
     <div class = "container">

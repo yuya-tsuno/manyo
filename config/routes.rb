@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :users
   root 'tasks#index'
   resources :tasks
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
   
-  # get 'tasks#search', to: 'tasks/search'
 end
