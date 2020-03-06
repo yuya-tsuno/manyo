@@ -1,8 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in?
-  before_action :correct_user, only: [:edit, :update, :destroy]
-
+  before_action :for_guest
+  before_action :currect_user, only: [:edit, :update, :destroy]
   
   def index
     # binding.pry
@@ -52,16 +51,12 @@ class TasksController < ApplicationController
 
   private
 
-  def task_params
-    params.require(:task).permit(:id, :title, :content, :limit, :status, :priority, user_id)
-  end
+    def task_params
+      params.require(:task).permit(:id, :title, :content, :limit, :status, :priority, user_id)
+    end
 
-  def set_task
-    @task = Task.find(params[:id])
-  end
-
-  def logged_in?
-    redirect_to new_session_path, notice:"ログインしてください" unless current_user.present?
-  end
+    def set_task
+      @task = Task.find(params[:id])
+    end
 
 end
