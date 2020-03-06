@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    redirect_to tasks_path, notice:"ログアウトしてください" if current_user.present?
   end
 
   def edit
