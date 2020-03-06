@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :for_guest, only: [:index, :show, :edit, :update, :destroy]
-  before_action :restrict_access, only: [:show, :edit, :update, :destroy]
+  before_action -> {restrict_access(@user.id)}, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
