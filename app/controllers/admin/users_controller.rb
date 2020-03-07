@@ -33,7 +33,12 @@ class Admin::UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      # binding.pry
+      if params[:user][:admin] == "0" && User.where(admin: true).count <= 1
+        flash[:alert] = 'Admin must exist at least 1.' 
+        format.html { render :edit}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      elsif @user.update(user_params)
         format.html { redirect_to admin_user_url(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

@@ -18,6 +18,7 @@ def user_seeds
   end
 end
 
+User.create(name: "y", email: "y@y.y", password: "yyyy", admin: true)
 user_seeds
 task_seed('タスク', 'タスク', '2020-03-01', 1, 0, 1)
 
