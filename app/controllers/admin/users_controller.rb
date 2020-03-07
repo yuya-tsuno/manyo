@@ -11,7 +11,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
-    redirect_to tasks_path, notice:"ログアウトしてください" if logged_in?
     @user = User.new
   end
 
@@ -23,10 +22,8 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        session[:user_id] = @user.id
-        format.html { redirect_to admin_user_url(@user), notice: 'User was successfully created and logged in.' }
+        format.html { redirect_to admin_user_url(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, locexitation: @user }
-        # binding.pry
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

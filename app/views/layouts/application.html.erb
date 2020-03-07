@@ -20,7 +20,7 @@
         </h4>
           <nav class="my-2 my-md-0 mr-md-3">
             <% if current_user&.admin? %>
-              <%= link_to 'トップ画面に戻る', admin_root_path %>
+              <%= link_to '一般ユーザー用ページに戻る', root_path %>
               <%= link_to '新規タスクの登録', new_admin_task_path %>
               <%= link_to '登録ユーザーの管理', admin_users_path %>
               <%= link_to '投稿タスクの管理', admin_root_path %>
@@ -30,7 +30,10 @@
             <% end %>
           </nav>
 
-          <% if logged_in? %>
+          <% if logged_in? && current_user&.admin? %>
+            <%= link_to("Profile", admin_user_path(current_user.id), method: :get, class: "btn btn-outline-primary") %>
+            <%= link_to("Logout", session_path(current_user.id), method: :delete, data: {confirm: "ログアウトしますか？"}, class: "btn btn-outline-primary") %>
+          <% elsif logged_in? %>
             <%= link_to("Profile", user_path(current_user.id), method: :get, class: "btn btn-outline-primary") %>
             <%= link_to("Logout", session_path(current_user.id), method: :delete, data: {confirm: "ログアウトしますか？"}, class: "btn btn-outline-primary") %>
           <% else %>
