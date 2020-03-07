@@ -23,4 +23,13 @@ module SessionsHelper
     end
   end
 
+  def admin?
+    if current_user&.admin?
+      @admin = current_user.name
+    else
+      flash[:notice] = "あなたのアカウントは管理者権限がありません"
+      redirect_to tasks_path
+    end
+  end
+
 end

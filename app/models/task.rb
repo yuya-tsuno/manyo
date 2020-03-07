@@ -19,5 +19,17 @@ class Task < ApplicationRecord
       Task.where(['title LIKE ?', "%#{search_title}%"]).where(['status = ?', search_status]).where('user_id = ?', current_user_id)
     end
   end
+
+  def self.search_for_admin(search_title, search_status)
+    if search_title.blank? && search_status.blank?
+      Task.select(:id, :title, :limit, :priority, :created_at, :user_id)
+    elsif search_title && search_status.blank?
+      Task.where('title LIKE ?', "%#{search_title}%").select(:id, :title, :limit, :priority, :created_at, :user_id)
+    elsif search_title.blank? && search_status
+      Task.where('status = ?', search_status).select(:id, :title, :limit, :priority, :created_at, :user_id)
+    else
+      Task.where(['title LIKE ?', "%#{search_title}%"]).where(['status = ?', search_status]).select(:id, :title, :limit, :priority, :created_at, :user_id)
+    end
+  end
   
 end

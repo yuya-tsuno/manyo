@@ -1,10 +1,10 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :for_guest, only: [:index, :show, :edit, :update, :destroy]
-  before_action -> {restrict_access(@user.id)}, only: [:show, :edit, :update, :destroy]
+  before_action :for_guest
+  before_action :admin?
 
   def index
-    @users = User.all
+    @users = User.select(:id, :name, :email)
   end
 
   def show
@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
-        format.html { redirect_to @user, notice: 'User was successfully created and logged in.' }
+        format.html { redirect_to admin_user_url(@user), notice: 'User was successfully created and logged in.' }
         format.json { render :show, status: :created, locexitation: @user }
         # binding.pry
       else
@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_user_url(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -49,7 +49,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
