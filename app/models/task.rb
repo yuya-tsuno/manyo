@@ -8,6 +8,7 @@ class Task < ApplicationRecord
   enum priority: { high: 0, middle: 1, low: 2 }
   enum status: { not_started_yet: 0, started: 1, completed: 2 }
 
+  #Todo scopeを用いて書き換え、検索と並び替えを同時に実行できるようにする。
   def self.search(search_title, search_status, current_user_id)
     if search_title.blank? && search_status.blank?
       Task.where('user_id = ?', current_user_id)
