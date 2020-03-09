@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_031150) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "password_digest", null: false
+    t.string "password_digest", null: false #実際はpasswordとpassword_confirmationの２カラムが使えるようになるだけ
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
