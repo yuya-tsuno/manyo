@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def show
   end
-
+  
   def new
-    redirect_to tasks_path, notice:"ログアウトしてください" if logged_in?
+    redirect_to root_path, notice:"ログアウトしてください" if logged_in?
     @user = User.new
   end
 

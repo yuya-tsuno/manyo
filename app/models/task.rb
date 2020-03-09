@@ -3,7 +3,7 @@ class Task < ApplicationRecord
   validates :content, presence: true
   validates :user_id, presence: true
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   enum priority: { high: 0, middle: 1, low: 2 }
   enum status: { not_started_yet: 0, started: 1, completed: 2 }
