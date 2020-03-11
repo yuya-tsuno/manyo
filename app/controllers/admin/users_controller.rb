@@ -49,10 +49,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+    if @user.admin == true && User.where(admin: true).count <= 1
+      flash[:alert] = 'Admin must exist at least 1.'
+      redirect_to admin_users_path
+    else
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -60,6 +65,7 @@ class Admin::UsersController < ApplicationController
   
     def set_user
       @user = User.find(params[:id])
+      # binding.pry
     end
 
     def user_params
