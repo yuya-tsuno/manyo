@@ -6,6 +6,9 @@
   <p><strong>Admin:</strong><%= @user.admin %></p>
 </div>
 
+<%= link_to 'Edit', edit_admin_user_path(@user) %> |
+<%= link_to 'Back', admin_users_path %>
+
 <table>
   <tr>
     <th>タスク名</th>
@@ -30,5 +33,3 @@
   <% end %>
 </table>
 
-<%= link_to 'Edit', edit_admin_user_path(@user) %> |
-<%= link_to 'Back', admin_users_path %>
