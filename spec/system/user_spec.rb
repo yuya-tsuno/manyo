@@ -19,11 +19,11 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'ユーザー登録された場合' do
       it 'ログインも同時に行われる' do
         visit new_user_path
-        fill_in "Name", with: 'user3'
-        fill_in "Email", with: 'user3@t.t'
-        fill_in "Password", with: 'user3'
-        fill_in "Password confirmation", with: 'user3'
-        click_on 'Create User'
+        fill_in "名前", with: 'user3'
+        fill_in "メールアドレス", with: 'user3@t.t'
+        fill_in "パスワード", with: 'user3'
+        fill_in "確認用パスワード", with: 'user3'
+        click_on '登録する'
         expect(page).to have_content 'User was successfully created and logged in.'
         expect(page).to have_content 'User:user3の詳細'
       end
