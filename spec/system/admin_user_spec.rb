@@ -27,15 +27,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       visit admin_users_path
       expect(page).to have_content 2
       expect(page).to have_content @n
-    end
-    
-    context 'ユーザー登録された場合ユーザを削除した場合' do #model行き？
-      it 'そのユーザが抱えているタスクを削除する' do
-        # binding.pry
-        @delete = User.destroy(@user1.id)
-        expect(Task.where(user_id: @user1.id).count).to eq 0
-      end
-    end
+    end    
   end
   
   describe 'ユーザー詳細管理画面' do
