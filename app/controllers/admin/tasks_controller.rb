@@ -1,11 +1,10 @@
-class TasksController < ApplicationController
+class Admin::TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :for_guest
-  before_action -> {restrict_access(@task.user_id)}, only: [:show, :edit, :update, :destroy]
+  before_action :admin?
   
   def index
-    # binding.pry
-    @q = Task.search(params[:search_title], params[:search_status], current_user.id)
+    @q = Task.search_for_admin(params[:search_title], params[:search_status])
     if params[:limit_sort_expired]
       @tasks = @q.order(limit: :asc).page(params[:page]).per(5)
     elsif params[:priority_sort_expired]
@@ -20,8 +19,6 @@ class TasksController < ApplicationController
   end  
   
   def create
-    # @task = Task.new(task_params)
-    # @task.user_id = current_user.id
     @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
@@ -39,15 +36,15 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "タスクを編集しました！"
+      redirect_to admin_tasks_path, notice: "タスクを編集しました！"
     else
-      render :edit
+      render :admin_edit
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice:"タスクを削除しました！"
+    redirect_to admin_tasks_path, notice:"タスクを削除しました！"
   end
 
   private

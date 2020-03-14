@@ -1,0 +1,38 @@
+<h4><%= current_user.name %>のタスク一覧</h4>
+
+<h6>タスク検索</h6>
+<%= form_tag(admin_tasks_path, method: 'get') do %>
+  <p>タスク名：<%= text_field_tag :search_title, params[:search_title] %></p>
+  <p>タスクステータス：<%= select_tag :search_status, options_for_select([['未着手', 0], ['着手中', 1], ['完了', 2]], params[:search_status]), :include_blank => true %></p>
+  <%= submit_tag 'Search', search_status: nil %>
+<% end %>
+
+<table>
+  <tr>
+    <th>タスク名</th>
+    <th><% if params[:limit_sort_expired] %><%= link_to "△タスク終了期限", admin_tasks_path %>
+     <% else %><%= link_to "タスク終了期限", admin_tasks_path(limit_sort_expired: "true") %><% end %></th>
+    <th><% if params[:priority_sort_expired] %><%= link_to "△タスク優先度", admin_tasks_path %>
+     <% else %><%= link_to "タスク優先度", admin_tasks_path(priority_sort_expired: "true") %><% end %></th>
+    <th><% if params[:limit_sort_expired] || params[:priority_sort_expired] %><%= link_to "タスク作成日時", admin_tasks_path %>
+     <% else %><%= link_to "▽タスク作成日時", admin_tasks_path %><% end %></th>
+    <th>タスク投稿者</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @tasks.each do |task| %>
+    <tr class="task_row">
+      <td><%= task.title %></td>
+      <td><%= task.limit %></td>
+      <td><%= task.priority %></td>
+      <td><%= task.created_at %></td>
+      <td><%= task.user.name %></td>
+      <td><%= link_to "タスク詳細", admin_task_path(task.id) %></td>
+      <td><%= link_to "タスク編集", edit_admin_task_path(task.id) %></td>
+      <td><%= link_to 'タスク削除', admin_task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
+    </tr>
+  <% end %>
+  <%= paginate @tasks %>
+</table>
+
