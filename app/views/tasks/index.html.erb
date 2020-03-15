@@ -11,9 +11,9 @@
   <tr>
     <th>タスク名</th>
     <th><% if params[:limit_sort_expired] %><%= link_to "△タスク終了期限", tasks_path %>
-     <% else %><%= link_to "タスク終了期限", tasks_path(limit_sort_expired: "true") %><% end %></th>
+     <% else %><%= link_to "タスク終了期限", tasks_path(limit_sort_expired: true) %><% end %></th>
     <th><% if params[:priority_sort_expired] %><%= link_to "△タスク優先度", tasks_path %>
-     <% else %><%= link_to "タスク優先度", tasks_path(priority_sort_expired: "true") %><% end %></th>
+     <% else %><%= link_to "タスク優先度", tasks_path(priority_sort_expired: true) %><% end %></th>
     <th><% if params[:limit_sort_expired] || params[:priority_sort_expired] %><%= link_to "タスク作成日時", tasks_path %>
      <% else %><%= link_to "▽タスク作成日時", tasks_path %><% end %></th>
     <th></th>
@@ -26,9 +26,9 @@
       <td><%= task.limit %></td>
       <td><%= task.priority %></td>
       <td><%= task.created_at %></td>
-      <td><%= link_to "タスク詳細", task_path(task.id) %></td>
-      <td><%= link_to "タスク編集", edit_task_path(task.id) %></td>
-      <td><%= link_to 'タスク削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
+      <td><%= link_to "タスク詳細", task_path(task.id), class: "btn btn-primary mr-3"%></td>
+      <td><%= link_to "タスク編集", edit_task_path(task.id), class: "btn btn-primary mr-3" %></td>
+      <td><%= link_to 'タスク削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: "btn btn-primary mr-3"%></td>
     </tr>
   <% end %>
   <%= paginate @tasks %>

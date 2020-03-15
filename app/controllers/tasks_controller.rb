@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-  end  
+  end
   
   def create
     # @task = Task.new(task_params)
@@ -32,7 +32,12 @@ class TasksController < ApplicationController
         render :new
       end
     end
-  end  
+  end
+
+
+  def show
+    @labeling = current_user.labelings.find_by(label_id: @label.id)
+  end
 
   def edit
   end
