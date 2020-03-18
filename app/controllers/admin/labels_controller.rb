@@ -1,4 +1,4 @@
-class LabelsController < ApplicationController
+class Admin::LabelsController < ApplicationController
   before_action :set_label, only: [:show, :edit, :update, :destroy]
 
   def index

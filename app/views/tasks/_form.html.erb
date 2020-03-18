@@ -38,5 +38,14 @@
     <%= f.select :priority, Task.priorities.keys.map {|k| [k, k]} %>
   </div>
 
-  <%= f.submit id: "task_submit" %>
+  <div class="task_labels">
+    <% Label.all.each do |label| %>
+      <%= f.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label style="background-color: aquamarine"><%= label.name %></label>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit id: "task_submit", class: "btn btn-primary mr-3" %>
+  </div>
 <% end %>

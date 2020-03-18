@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     root 'tasks#index'
     resources :tasks
     resources :users
+    resources :labels
+    resources :labelings, only: [:create, :destroy]  
   end
 end

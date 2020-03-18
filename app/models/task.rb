@@ -6,7 +6,8 @@ class Task < ApplicationRecord
   belongs_to :user, optional: true
 
   has_many :labelings, dependent: :destroy
-  has_many :labeling_labels, through: :labelings, source: :label
+  has_many :labels, through: :labelings
+  # has_many :labeling_labels, through: :labelings, source: :label
 
   enum priority: { high: 0, middle: 1, low: 2 }
   enum status: { not_started_yet: 0, started: 1, completed: 2 }

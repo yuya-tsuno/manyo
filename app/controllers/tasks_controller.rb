@@ -36,7 +36,6 @@ class TasksController < ApplicationController
 
 
   def show
-    @labeling = current_user.labelings.find_by(label_id: @label.id)
   end
 
   def edit
@@ -44,7 +43,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "タスクを編集しました！"
+      redirect_to task_path(@task.id), notice: "タスクを編集しました！"
     else
       render :edit
     end
@@ -58,7 +57,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:id, :title, :content, :limit, :status, :priority, :user_id)
+      params.require(:task).permit(:id, :title, :content, :limit, :status, :priority, :user_id, {label_ids: []} )
     end
 
     def set_task
