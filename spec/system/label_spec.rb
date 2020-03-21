@@ -11,6 +11,9 @@ RSpec.describe 'ラベル管理機能', type: :system do
 
     label1 = FactoryBot.create(:label)
     label2 = FactoryBot.create(:label)
+
+    labeling1 = FactoryBot.create(:labeling)
+    labeling2 = FactoryBot.create(:labeling)
   end
   
   def login_as(user)
@@ -30,31 +33,31 @@ RSpec.describe 'ラベル管理機能', type: :system do
         expect(page).to have_content 'label3'
       end
 
-    context 'ユーザーが自分でラベルを作成した場合' do
-      it '自身の作ったラベルのみ表示されること' do
-        login_as(@user1)
-        visit labels_path
-        expect(page).to have_content 'label3'
-        pending '+α課題、未実装'
-      end
-    end
+    # context 'ユーザーが自分でラベルを作成した場合' do
+    #   it '自身の作ったラベルのみ表示されること' do
+    #     login_as(@user1)
+    #     visit labels_path
+    #     expect(page).to have_content 'label3'
+    #     pending '+α課題、未実装'
+    #   end
+    # end
   end
     
   describe 'タスク一覧画面' do
     it 'タスク一覧画面で、ラベル検索ができること' do
-      click_on 
+      click_on ('label')
       click_on('Search')
-      expect(page).to have_content 'label4'
+      sleep 0.1
+      expect(page).to have_content 'label1'
     end
   end
 
-  describe 'タスク編集画面' do
-    it 'ラベルの複数編集ができること' do
-      click_on 
-      click_on('Search')
-      expect(page).to have_content 'label4'
-      pending '+α課題、未実装'
-    end
-  end
-
+  # describe 'タスク編集画面' do
+  #   it 'ラベルの複数編集ができること' do
+  #     click_on 
+  #     click_on('Search')
+  #     expect(page).to have_content 'label4'
+  #     pending '+α課題、未実装'
+  #   end
+  # end
 end

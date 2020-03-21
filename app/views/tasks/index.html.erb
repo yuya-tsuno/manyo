@@ -4,7 +4,7 @@
 <%= form_tag(tasks_path, method: 'get') do %>
   <p>タスク名：<%= text_field_tag :search_title, params[:search_title] %></p>
   <p>タスクステータス：<%= select_tag :search_status, options_for_select([['未着手', 0], ['着手中', 1], ['完了', 2]], params[:search_status]), :include_blank => true %></p>
-  <p>ラベル：<%= select("label_id", Label.all.pluck(:name, :id), { include_blank: true }) %></p>
+  <p>ラベル：<%= select("label_id", Label.pluck(:name, :id), { include_blank: true }) %></p>
   <%= submit_tag 'Search', search_status: nil %>
 <% end %>
 
