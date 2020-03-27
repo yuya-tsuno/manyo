@@ -12,4 +12,5 @@
 </p>
 
 <%= link_to '編集へ', edit_task_path(@task.id) %> |
-<%= link_to 'タスク一覧へ', tasks_path %>
+<%= link_to 'タスク一覧へ', tasks_path %> |
+<%= link_to 'タスク管理画面へ', admin_tasks_path if current_user&.admin? %>

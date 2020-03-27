@@ -7,4 +7,5 @@
 <p><strong>タスク投稿者: </strong><%= @task.user.name %></p>
 
 <%= link_to '編集へ', edit_admin_task_path(@task.id) %> |
-<%= link_to 'タスク一覧へ', admin_tasks_path %>
+<%= link_to 'タスク一覧へ', admin_tasks_path %> |
+<%= link_to 'タスク管理画面へ', admin_tasks_path if current_user&.admin? %>

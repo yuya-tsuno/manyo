@@ -25,7 +25,7 @@ class Admin::TasksController < ApplicationController
       render :new
     else
       if @task.save
-        redirect_to task_path(@task.id), notice: "タスクを作成しました！"
+        redirect_to admin_task_path(@task.id), notice: "タスクを作成しました！"
       else
         render :new
       end
