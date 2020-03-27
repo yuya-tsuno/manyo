@@ -4,14 +4,15 @@ class Admin::TasksController < ApplicationController
   before_action :admin?
   
   def index
-    @q = Task.search_for_admin(params[:search_title], params[:search_status])
+    search_tasks = Task.all.title(params[:search_title]).status(params[:search_status]).label(params[:search_labels]).includes(:labels)
     if params[:limit_sort_expired]
-      @tasks = @q.order(limit: :asc).page(params[:page]).per(5)
+      order_tasks = search_tasks.by_limit
     elsif params[:priority_sort_expired]
-      @tasks = @q.order(priority: :asc).page(params[:page]).per(5)
+      order_tasks = search_tasks.by_priority
     else
-      @tasks = @q.order(created_at: :desc).page(params[:page]).per(5)
+      order_tasks = search_tasks.by_created_at
     end
+    @tasks = order_tasks.page(params[:page]).per(10)
   end
 
   def new

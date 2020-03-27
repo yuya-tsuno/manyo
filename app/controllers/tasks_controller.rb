@@ -4,15 +4,18 @@ class TasksController < ApplicationController
   before_action -> {restrict_access(@task.user_id)}, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.all.search_with_current_user(@current_user).kaminari
-    # @q = Task.search(params[:search_title], params[:search_status], current_user.id)
-    # if params[:limit_sort_expired]
-    #   @tasks = @q.order(limit: :asc).page(params[:page]).per(5)
-    # elsif params[:priority_sort_expired]
-    #   @tasks = @q.order(priority: :asc).page(params[:page]).per(5)
-    # else
-    #   @tasks = @q.order(created_at: :desc).page(params[:page]).per(5)
-    # end
+    user_tasks = current_user.tasks
+    search_tasks = user_tasks.title(params[:search_title]).status(params[:search_status]).label(params[:search_labels]).includes(:labels)
+
+    if params[:limit_sort_expired]
+      order_tasks = search_tasks.by_limit
+    elsif params[:priority_sort_expired]
+      order_tasks = search_tasks.by_priority
+    else
+      order_tasks = search_tasks.by_created_at
+    end
+    
+    @tasks = order_tasks.page(params[:page]).per(5)
   end
 
   def new
@@ -39,6 +42,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    # binding.pry
   end
 
   def update

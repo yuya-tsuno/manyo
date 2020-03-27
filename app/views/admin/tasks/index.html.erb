@@ -1,10 +1,25 @@
 <h4><%= current_user.name %>のタスク一覧</h4>
 
 <h6>タスク検索</h6>
-<%= form_tag(admin_tasks_path, method: 'get') do %>
-  <p>タスク名：<%= text_field_tag :search_title, params[:search_title] %></p>
-  <p>タスクステータス：<%= select_tag :search_status, options_for_select([['未着手', 0], ['着手中', 1], ['完了', 2]], params[:search_status]), :include_blank => true %></p>
-  <%= submit_tag 'Search', search_status: nil %>
+<%= form_with url: admin_tasks_path, method: :get, local: true do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :search_title, value: params[:search_title] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :search_status, options_for_select([['未着手', 0], ['着手中', 1], ['完了', 2]], selected: params[:search_status]), :include_blank => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :labels %>
+    <%= form.collection_check_boxes(:search_labels, Label.all, :id, :name, checked: params[:search_labels], include_hidden: false) %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit 'Search', search_status: nil %>
+  </div>
 <% end %>
 
 <table>
@@ -27,7 +42,7 @@
       <td><%= task.limit %></td>
       <td><%= task.priority %></td>
       <td><%= task.created_at %></td>
-      <td><%= task.user.name %></td>
+      <td>created_by...<strong><%= task.user.name %></strong></td>
       <td><%= link_to "タスク詳細", admin_task_path(task.id) %></td>
       <td><%= link_to "タスク編集", edit_admin_task_path(task.id) %></td>
       <td><%= link_to 'タスク削除', admin_task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
