@@ -9,9 +9,9 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports.
-  # falseで一般ユーザー用のエラーページに変更します。serverの再起動忘れずに。
-  config.consider_all_requests_local = true
+  # falseで一般ユーザー用のエラーページ、trueでdefaultの開発者用エラーページに変更します。serverの再起動忘れずに。
+  # config.consider_all_requests_local = true
+  config.consider_all_requests_local = false
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
