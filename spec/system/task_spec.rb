@@ -57,6 +57,28 @@ end
         expect(task_list[1]).to have_content 'task'
         expect(task_list[2]).to have_content 'not_important_task'
       end
+
+      it 'チャックをつけたラベルを持つタスクのみ表示させる（ラベル検索機能）' do
+        has_label1_task = FactoryBot.create(:task, title: 'has_label1_task', priority: 0, user: @user)
+        has_label2_task = FactoryBot.create(:task, title: 'has_label2_task', priority: 0, user: @user)
+        has_label1_and_label2_task = FactoryBot.create(:task, title: 'has_label1_and_label2_task', priority: 0, user: @user)
+
+        label1 = FactoryBot.create(:label, name: 'test_label1')
+        label2 = FactoryBot.create(:label, name: 'test_label2')
+
+        new_labeling = FactoryBot.create(:labeling, task_id: has_label1_task.id, label_id: label1.id)
+        new_labeling = FactoryBot.create(:labeling, task_id: has_label2_task.id, label_id: label2.id)
+        new_labeling = FactoryBot.create(:labeling, task_id: has_label1_and_label2_task.id, label_id: label1.id)
+        new_labeling = FactoryBot.create(:labeling, task_id: has_label1_and_label2_task.id, label_id: label2.id)
+
+        visit tasks_path
+        check 'test_label1'
+        click_on 'Search'
+        sleep 0.1
+        expect(page).to have_content 'has_label1_task'
+        expect(page).to have_no_content 'has_label2_task'
+        expect(page).to have_content 'has_label1_and_label2_task'
+      end
     end
   end
 
