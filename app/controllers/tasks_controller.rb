@@ -26,6 +26,7 @@ class TasksController < ApplicationController
     # @task = Task.new(task_params)
     # @task.user_id = current_user.id
     @task = current_user.tasks.build(task_params)
+    # binding.pry
     if params[:back]
       render :new
     else
