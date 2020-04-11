@@ -32,6 +32,8 @@
     <th><% if params[:limit_sort_expired] || params[:priority_sort_expired] %><%= link_to "タスク作成日時", admin_tasks_path %>
      <% else %><%= link_to "▽タスク作成日時", admin_tasks_path %><% end %></th>
     <th>タスク投稿者</th>
+    <th>ラベル</th>
+    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -43,9 +45,16 @@
       <td><%= task.priority %></td>
       <td><%= task.created_at %></td>
       <td>created_by...<strong><%= task.user.name %></strong></td>
-      <td><%= link_to "タスク詳細", admin_task_path(task.id) %></td>
-      <td><%= link_to "タスク編集", edit_admin_task_path(task.id) %></td>
-      <td><%= link_to 'タスク削除', admin_task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }%></td>
+      <td>
+        <strong>
+          <% task.labels.each do |label| %>
+            <span class="label label-info"><%= label.name %></span>
+          <% end %>
+        </strong>
+      </td>
+      <td><%= link_to "タスク詳細", admin_task_path(task.id), class: "btn btn-primary mr-3" %></td>
+      <td><%= link_to "タスク編集", edit_admin_task_path(task.id), class: "btn btn-primary mr-3" %></td>
+      <td><%= link_to 'タスク削除', admin_task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' }, class: "btn btn-primary mr-3" %></td>
     </tr>
   <% end %>
   <%= paginate @tasks %>

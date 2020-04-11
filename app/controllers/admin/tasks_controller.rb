@@ -13,6 +13,7 @@ class Admin::TasksController < ApplicationController
       order_tasks = search_tasks.by_created_at
     end
     @tasks = order_tasks.page(params[:page]).per(10)
+    # binding.pry
   end
 
   def new
